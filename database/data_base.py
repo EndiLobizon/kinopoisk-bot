@@ -1,4 +1,6 @@
 import logging
+from typing import Any, List
+
 from peewee import *
 import pymysql
 
@@ -53,7 +55,7 @@ class MoviesId(Model):
 ensure_table_exists()
 
 
-def insert_movie(movie_id, film_name):
+def insert_movie(movie_id: str, film_name: str) -> None:
     # Попробуем создать запись в таблице, если такого movie_id нет
     try:
         movie, created = MoviesId.get_or_create(movie_id=movie_id, film_name=film_name)
@@ -65,7 +67,7 @@ def insert_movie(movie_id, film_name):
         logging.error(f"Ошибка при добавлении фильма: {e}")
 
 
-def get_movie_title_by_id(movie_id):
+def get_movie_title_by_id(movie_id: str) -> str | None:
     try:
         movie = MoviesId.get(MoviesId.movie_id == movie_id)
         return movie.film_name  # Возвращаем название фильма
@@ -73,7 +75,7 @@ def get_movie_title_by_id(movie_id):
         return None  # Если фильм с таким ID не найден
 
 
-def save_user_query(user_id, user_request, search_id):
+def save_user_query(user_id: int, user_request: str, search_id: int) -> None:
     UserQuery.create(
         user_id=user_id,
         query=user_request,
@@ -81,7 +83,7 @@ def save_user_query(user_id, user_request, search_id):
     )
 
 
-def save_user_film(user_id, movie_id, film_name, year_of_release):
+def save_user_film(user_id: int, movie_id: int, film_name: str, year_of_release: str) -> None:
     UserSaves.create(
         user_id=user_id,
         movie_id=movie_id,
@@ -91,7 +93,7 @@ def save_user_film(user_id, movie_id, film_name, year_of_release):
     )
 
 
-def check_possibility_of_saving(user_id, film_name, year_of_release):
+def check_possibility_of_saving(user_id: int, film_name: str, year_of_release: str) -> bool:
     # Проверяем, существует ли запись для данного пользователя и фильма
     exists = UserSaves.select().where(
         (UserSaves.user_id == user_id) &
@@ -103,7 +105,7 @@ def check_possibility_of_saving(user_id, film_name, year_of_release):
     return exists
 
 
-def get_user_queries(user_id):
+def get_user_queries(user_id: int) -> list[str]:
     queries = (
         UserQuery
         .select()
@@ -114,7 +116,7 @@ def get_user_queries(user_id):
     return [f"{query.timestamp}: {query.query}" for query in queries]
 
 
-def get_user_saves(user_id):
+def get_user_saves(user_id: int) -> list[str]:
     saves = (
         UserSaves
         .select()
@@ -124,7 +126,7 @@ def get_user_saves(user_id):
     return [f"{save.film_name}_({save.year_of_release})_{save.viewed_or_not}_{save.movie_id}" for save in saves]
 
 
-def toggle_viewed_status(user_id, film_name, year_of_release):
+def toggle_viewed_status(user_id: int, film_name: str, year_of_release: str) -> None:
     film_name = film_name.strip()
     year_of_release = str(year_of_release)
     save = UserSaves.select().where(
@@ -150,7 +152,7 @@ def toggle_viewed_status(user_id, film_name, year_of_release):
         logging.info("No record found for the given parameters.")
 
 
-def get_search_id(user_id, query):
+def get_search_id(user_id: int, query: str) -> int | None:
     # Поиск в базе данных id запроса (название, рейтинг, жанр)
     search_id_query = (
         UserQuery

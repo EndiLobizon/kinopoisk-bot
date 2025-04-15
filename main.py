@@ -11,7 +11,7 @@ import logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 
-def main():
+def main() -> None:
     application = Application.builder().token(BOT_TOKEN).concurrent_updates(True).build()
     application.add_handler(CommandHandler("start", bot_start))
     application.add_handler(CommandHandler("help", bot_help))
@@ -27,4 +27,5 @@ def main():
 if __name__ == '__main__':
     logging.info('Запуск бота...')
     main()
+
 

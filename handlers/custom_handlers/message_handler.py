@@ -6,7 +6,7 @@ from api.api_kinopoisk import search_film_name, search_film_rating, search_film_
 from database.data_base import save_user_query
 
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text = update.message.text
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id

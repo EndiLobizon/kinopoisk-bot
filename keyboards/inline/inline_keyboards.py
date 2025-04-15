@@ -6,7 +6,7 @@ from database.data_base import (get_search_id, save_user_film, check_possibility
 from handlers.default_handlers.saved_movies import bot_saved_movies
 
 
-async def handle_button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     data = query.data
     bot = context.bot

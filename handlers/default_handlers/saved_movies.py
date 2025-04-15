@@ -152,5 +152,5 @@ async def saves_page_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             logging.info("query.message is None, невозможно обновить сообщение")
 
 
-def shorten_name(name):
+def shorten_name(name: str) -> str:
     return name[:33] + "..." if len(name) > 33 else name
