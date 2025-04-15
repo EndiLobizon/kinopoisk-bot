@@ -108,3 +108,4 @@ async def history_page_callback(update: Update, context: ContextTypes.DEFAULT_TY
             await query.message.edit_text("Запросы не найдены.")
         else:
             logging.info("query.message is None, невозможно обновить сообщение")
+

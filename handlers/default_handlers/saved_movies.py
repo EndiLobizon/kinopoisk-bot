@@ -154,3 +154,4 @@ async def saves_page_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 
 def shorten_name(name: str) -> str:
     return name[:33] + "..." if len(name) > 33 else name
+

@@ -172,3 +172,4 @@ def get_search_id(user_id: int, query: str) -> int | None:
         return None  # Если не найдено соответствия
 
 
+

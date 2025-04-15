@@ -71,3 +71,4 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.message.reply_text('Пожалуйста, используйте кнопки меню для взаимодействия.')
 
 
+

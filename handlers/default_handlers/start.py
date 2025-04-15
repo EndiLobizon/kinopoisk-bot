@@ -9,3 +9,4 @@ async def bot_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f"Привет, {user_name}!\n Я чат-бот для поиска фильмов и сериалов 🎬🤖\n "
                                     f"Используйте кнопки для взаимодействия со мной!")
     await send_main_menu(update, context)
+

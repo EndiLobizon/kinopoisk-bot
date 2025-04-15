@@ -386,3 +386,4 @@ async def search_film_genres(genre_name: str, user_id: int, chat_id: int, bot, p
     except Exception as e:
         logger.exception(f"Произошла ошибка при выполнении запроса: {str(e)}")
         return f"Произошла ошибка при выполнении запроса: {str(e)}"
+
