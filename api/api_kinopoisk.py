@@ -5,7 +5,6 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from database.data_base import check_possibility_of_saving, insert_movie
 from config_data.config import url_name, url_rating, url_genre
 
-
 logger = logging.getLogger(__name__)
 
 

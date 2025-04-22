@@ -31,3 +31,4 @@ def url_rating(rating: str, page_number: int = 1) -> str:
 
 def url_genre(genre_name: str, page_number: int = 1) -> str:
     return f"{BASE_URL}?page={page_number}&limit=5&selectFields=&genres.name={genre_name.lower()}"
+
