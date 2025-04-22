@@ -3,13 +3,15 @@ import logging
 from config_data.config import RAPID_API_KEY
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from database.data_base import check_possibility_of_saving, insert_movie
+from config_data.config import url_name, url_rating, url_genre
 
 
 logger = logging.getLogger(__name__)
 
 
 async def search_film_name(name_film: str, user_id: int, chat_id: int, bot, page_number: int = 1):
-    url = f"https://api.kinopoisk.dev/v1.4/movie/search?page={page_number}&limit=1&query={name_film}"
+
+    url = url_name(name_film, page_number)
 
     headers = {
         "accept": "application/json",
@@ -135,7 +137,7 @@ async def search_film_name(name_film: str, user_id: int, chat_id: int, bot, page
 
 async def search_film_rating(rating: str, user_id: int, chat_id: int, bot, page_number: int = 1):
 
-    url = f"https://api.kinopoisk.dev/v1.4/movie?page={page_number}&limit=5&selectFields=&rating.kp={rating}"
+    url = url_rating(rating, page_number)
 
     headers = {
         "accept": "application/json",
@@ -257,8 +259,7 @@ async def search_film_rating(rating: str, user_id: int, chat_id: int, bot, page_
 
 async def search_film_genres(genre_name: str, user_id: int, chat_id: int, bot, page_number: int = 1):
 
-    url = (f"https://api.kinopoisk.dev/v1.4/movie?page={page_number}"
-           f"&limit=5&selectFields=&genres.name={genre_name.lower()}")
+    url = url_genre(genre_name, page_number)
 
     headers = {
         "accept": "application/json",

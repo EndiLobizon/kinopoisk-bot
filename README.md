@@ -29,7 +29,56 @@
 - [python-dotenv](https://pypi.org/project/python-dotenv/)
 - [peewee](http://docs.peewee-orm.com/)
 - [PyMySQL](https://pypi.org/project/PyMySQL/)
-- [python-telegram-bot](https://pypi.org/project/python-telegram-bot/) *(отсутствует в requirements)*
+- [python-telegram-bot](https://pypi.org/project/python-telegram-bot/)
+
+## 🌐 Используемые API
+
+Бот использует публичный API от Kinopoisk.dev для получения информации о фильмах.
+
+📌 Основные эндпоинты:
+    🔍 Поиск по названию: 
+    GET https://api.kinopoisk.dev/v1.4/movie/search?page={page}&limit=1&query={name}
+    ⭐ Поиск по рейтингу: 
+    GET https://api.kinopoisk.dev/v1.4/movie?page={page}&limit=5&selectFields=&rating.kp={rating}
+    🎬 Поиск по жанру: 
+    GET https://api.kinopoisk.dev/v1.4/movie?page={page}&limit=5&selectFields=&genres.name={genre}
+
+⚠️ Для работы требуется API-ключ, который можно получить после регистрации на kinopoisk.dev.
+
+🧾 Пример структуры ответа (JSON) по запросу "Интерстеллар":
+{
+  "docs": [
+    {
+      "id": 258687,
+      "name": "Интерстеллар",
+      "alternativeName": "Interstellar",
+      "year": 2014,
+      "description": "Когда засуха, пыльные бури и вымирание растений приводят человечество к продовольственному...",
+      "movieLength": 169,
+      "rating": {
+        "kp": 8.655,
+        "imdb": 8.7
+      },
+      "votes": {
+        "kp": 1052499,
+        "imdb": 2323393
+      },
+      "genres": [
+        { "name": "фантастика" },
+        { "name": "драма" },
+        { "name": "приключения" }
+      ],
+      "countries": [
+        { "name": "США" },
+        { "name": "Великобритания" },
+        { "name": "Канада" }
+      ],
+      "poster": {
+        "url": "https://image.openmoviedb.com/kinopoisk-images/.../orig"
+      }
+    }
+  ]
+}
 
 ## ⚙️ Установка и запуск
 
@@ -43,7 +92,7 @@
 
     pip install -r requirements.txt
 
-3. Создайте файл .env в корне проекта со следующим содержимым:
+3. Создайте файл .env в корне проекта с содержимым из файла .env.template:
     
     BOT_TOKEN="your_telegram_bot_token"
     RAPID_API_KEY="your_rapidapi_key"
